@@ -8,6 +8,7 @@ import { TechStackSection } from '@/sections/TechStackSection'
 import { PortfolioSection } from '@/sections/PortfolioSection'
 import { TestimonialsSection } from '@/sections/TestimonialsSection'
 import { ContactSection } from '@/sections/ContactSection'
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <TestimonialsSection />
         <ContactSection />
       </main>
+      <Analytics />
     </>
   )
 }
