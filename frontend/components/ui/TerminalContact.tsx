@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Send } from 'lucide-react'
+import { MdMail, MdOutlinePhoneAndroid } from 'react-icons/md'
 
 export function TerminalContact() {
     const sectionRef = useRef(null)
@@ -107,16 +108,16 @@ export function TerminalContact() {
                             className="flex flex-col gap-4"
                         >
                             <a
-                                href="mailto:hello@kamaleshacharya.com"
+                                href="mailto:kamaleshacharya224@gmail.com"
                                 className="inline-flex items-center gap-3 text-primary-600 hover:text-primary-700 font-semibold transition-colors"
                             >
-                                <span className="font-mono">📧 hello@kamaleshacharya.com</span>
+                                <span className="font-mono"><MdMail /> kamaleshacharya224@gmail.com</span>
                             </a>
                             <a
-                                href="tel:+919876543210"
+                                href="tel:+918895816001"
                                 className="inline-flex items-center gap-3 text-primary-600 hover:text-primary-700 font-semibold transition-colors"
                             >
-                                <span className="font-mono">📱 +91 98765 43210</span>
+                                <span className="font-mono"><MdOutlinePhoneAndroid /> +91 88958 16001</span>
                             </a>
                         </motion.div>
                     </motion.div>

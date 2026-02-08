@@ -3,180 +3,130 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { GraduationCap, Briefcase } from 'lucide-react'
 import { resumeData } from '@/data/content'
-
-interface TimelineItemProps {
-    title: string
-    organization: string
-    duration: string
-    description: string
-    isCurrent?: boolean
-    index: number
-    side: 'left' | 'right'
-}
-
-function TimelineItem({ title, organization, duration, description, isCurrent, index, side }: TimelineItemProps) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: side === 'left' ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.15, duration: 0.5 }}
-            className="relative"
-        >
-            {/* Timeline dot */}
-            <div className={`
-        absolute top-0 w-4 h-4 rounded-full border-4 z-10
-        ${isCurrent
-                    ? 'bg-primary-500 border-primary-200'
-                    : 'bg-white border-neutral-300'
-                }
-        ${side === 'left' ? '-right-2' : '-left-2'}
-      `} />
-
-            {/* Content card */}
-            <div className={`
-        bg-white rounded-2xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-300
-        ${isCurrent ? 'border-l-4 border-primary-500' : ''}
-      `}>
-                <span className={`
-          inline-block text-xs font-medium px-3 py-1 rounded-full mb-3
-          ${isCurrent
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'bg-neutral-100 text-neutral-600'
-                    }
-        `}>
-                    {duration}
-                </span>
-                <h4 className="font-heading font-semibold text-lg text-neutral-900 mb-1">
-                    {title}
-                </h4>
-                <p className="text-primary-500 font-medium text-sm mb-3">
-                    {organization}
-                </p>
-                <p className="text-neutral-500 text-sm leading-relaxed">
-                    {description}
-                </p>
-            </div>
-        </motion.div>
-    )
-}
-
-function TimelineColumn({
-    title,
-    icon: Icon,
-    items,
-    side
-}: {
-    title: string
-    icon: React.ElementType
-    items: Array<{
-        title: string
-        organization: string
-        duration: string
-        description: string
-        isCurrent?: boolean
-    }>
-    side: 'left' | 'right'
-}) {
-    return (
-        <div>
-            {/* Column Header */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-3 mb-8"
-            >
-                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
-                    <Icon size={24} className="text-primary-500" />
-                </div>
-                <h3 className="font-heading text-2xl font-semibold text-neutral-900">
-                    {title}
-                </h3>
-            </motion.div>
-
-            {/* Timeline items */}
-            <div className={`
-        relative space-y-8 
-        ${side === 'left' ? 'pr-6 border-r-2 border-neutral-200' : 'pl-6 border-l-2 border-neutral-200'}
-      `}>
-                {items.map((item, index) => (
-                    <TimelineItem
-                        key={item.title + item.organization}
-                        {...item}
-                        index={index}
-                        side={side}
-                    />
-                ))}
-            </div>
-        </div>
-    )
-}
+import { ScrollTimelineItem } from '@/components/ui/ScrollTimelineItem'
 
 export function ResumeSection() {
     const sectionRef = useRef(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
 
+    // Combine all timeline items and sort by date
+    const allTimelineItems = [
+        ...resumeData.experience,
+        ...resumeData.education,
+    ].sort((a, b) => {
+        const getYear = (duration: string) => {
+            const parts = duration.split('-').map(p => p.trim())
+            const year = parts[parts.length - 1]
+            if (year.toLowerCase() === 'present') return 9999
+            return parseInt(year) || 0
+        }
+        return getYear(b.duration) - getYear(a.duration)
+    })
+
     return (
         <section
             id="resume"
             ref={sectionRef}
-            className="py-24 lg:py-32 bg-neutral-50"
+            className="py-24 lg:py-32 bg-white relative overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            {/* Background: Massive Low-Opacity Text */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <motion.div
+                    className="absolute text-neutral-900 font-heading font-black opacity-5"
+                    style={{
+                        fontSize: 'clamp(12rem, 20vw, 24rem)',
+                        lineHeight: '1',
+                        left: '50%',
+                        top: '40%',
+                        transform: 'translate(-50%, -50%)',
+                        whiteSpace: 'nowrap',
+                        zIndex: 0,
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 0.03 } : {}}
+                    transition={{ duration: 1 }}
+                >
+                    HISTORY
+                </motion.div>
+            </div>
+
+            <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="mb-20"
                 >
-                    <span className="inline-block text-primary-500 font-medium text-sm tracking-wider uppercase mb-4">
-                        My Journey
-                    </span>
-                    <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4">
-                        Resume
+                    <div className="font-mono text-xs md:text-sm text-primary-600 tracking-widest uppercase mb-6">
+                        // Career Timeline
+                    </div>
+                    <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-neutral-900 mb-6">
+                        Journey
                     </h2>
-                    <p className="text-neutral-500 text-lg max-w-2xl mx-auto">
-                        A timeline of my education and professional experience
+                    <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-2xl">
+                        Scroll through my career timeline. Each milestone activates automatically as it enters your focus—revealing the full story behind every role.
                     </p>
                 </motion.div>
 
-                {/* Two Column Timeline */}
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-                    <TimelineColumn
-                        title="Education"
-                        icon={GraduationCap}
-                        items={resumeData.education}
-                        side="right"
-                    />
-                    <TimelineColumn
-                        title="Experience"
-                        icon={Briefcase}
-                        items={resumeData.experience}
-                        side="left"
-                    />
-                </div>
+                {/* Scroll-Narrative Timeline */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-16 relative"
+                >
+                    {allTimelineItems.map((item, index) => (
+                        <ScrollTimelineItem
+                            key={`${item.title}-${item.organization}`}
+                            item={item}
+                            index={index}
+                            totalItems={allTimelineItems.length}
+                        />
+                    ))}
+                </motion.div>
 
-                {/* Download Resume Button */}
+                {/* Download Resume CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="text-center mt-16"
+                    className="mt-20 pt-12 border-t border-neutral-200"
                 >
-                    <a
-                        href="#"
-                        className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-medium px-8 py-4 rounded-xl shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-0.5"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Download Full Resume
-                    </a>
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div>
+                            <h3 className="font-heading text-2xl md:text-3xl font-bold text-neutral-900 mb-2">
+                                Want the full story?
+                            </h3>
+                            <p className="text-neutral-600 text-base md:text-lg">
+                                Download my complete resume as a PDF.
+                            </p>
+                        </div>
+                        <motion.a
+                            href="/resume.pdf"
+                            download
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-primary-600 hover:bg-primary-700 text-white font-mono font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 group"
+                        >
+                            <svg
+                                className="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                />
+                            </svg>
+                            Download Resume
+                        </motion.a>
+                    </div>
                 </motion.div>
             </div>
         </section>

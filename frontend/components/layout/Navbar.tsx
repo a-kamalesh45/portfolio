@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
@@ -11,9 +11,12 @@ const navItems = [
     { label: 'Resume', href: '#resume' },
 ]
 
+const fonts = ['Foldit', 'Rubik Glitch Pop', 'Tilt Prism']
+
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeNavItem, setActiveNavItem] = useState('home')
+    const [fontIndex, setFontIndex] = useState(0)
 
     const handleNavClick = (href: string) => {
         const id = href.replace('#', '')
@@ -26,6 +29,14 @@ export function Navbar() {
         }
     }
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setFontIndex((prev) => (prev + 1) % fonts.length)
+        }, 1500)
+
+        return () => clearInterval(interval)
+    }, [])
+
     return (
         <>
             {/* Floating Pill Navbar - Desktop */}
@@ -36,7 +47,7 @@ export function Navbar() {
                     transition={{ duration: 0.5 }}
                     className="
                         flex items-center justify-between
-                        px-8 py-3
+                        px-8 py-1
                         max-w-4xl
                         bg-white/80 backdrop-blur-md
                         border border-white/20
@@ -51,13 +62,18 @@ export function Navbar() {
                         transition={{ delay: 0.1, duration: 0.5 }}
                         className="flex items-center mr-12"
                     >
-                        <span className="font-heading font-bold text-2xl text-neutral-900 tracking-tight">
+                        <motion.span
+                            className="font-bold text-4xl text-neutral-900 tracking-tight w-12"
+                            style={{
+                                fontFamily: `"${fonts[fontIndex]}", sans-serif`
+                            }}
+                        >
                             KA
-                        </span>
+                        </motion.span>
                     </motion.div>
 
                     {/* Navigation Links - Center */}
-                    <motion.div className="flex items-center gap-1" layout>
+                    <motion.div className="flex items-center gap-1 py-2" layout>
                         {navItems.map((item, index) => (
                             <motion.div
                                 key={item.href}
@@ -129,7 +145,14 @@ export function Navbar() {
                     "
                 >
                     {/* Logo */}
-                    <span className="font-heading font-bold text-lg text-neutral-900">KA</span>
+                    <motion.span
+                        className="font-bold text-lg text-neutral-900"
+                        style={{
+                            fontFamily: `"${fonts[fontIndex]}", sans-serif`
+                        }}
+                    >
+                        KA
+                    </motion.span>
 
                     {/* Menu Button */}
                     <button
