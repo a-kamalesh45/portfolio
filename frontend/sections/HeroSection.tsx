@@ -16,26 +16,53 @@ const socialIcons = [
 
 const BLOB_PATH = "M65.4,-37.9C79.2,-13.9,81,17,68.1,38C55.2,59.1,27.6,70.5,1.5,69.6C-24.6,68.8,-49.3,55.7,-56,38.2C-62.6,20.7,-51.3,-1.2,-39,-24.4C-26.7,-47.6,-13.3,-72,6.2,-75.6C25.8,-79.2,51.6,-62,65.4,-37.9Z"
 
+const TYPEWRITER_ROLES = [
+    "Full-Stack Engineer",
+    "Creative Technologist"
+]
+
 // --- HOOKS ---
 
-function useTypingEffect(text: string, speed: number = 50) {
+function useTypewriter(words: string[], typingSpeed: number = 50, deletingSpeed: number = 30, pauseTime: number = 2000) {
     const [displayedText, setDisplayedText] = useState('')
+    const [wordIndex, setWordIndex] = useState(0)
+    const [isDeleting, setIsDeleting] = useState(false)
+
     useEffect(() => {
-        let i = 0
-        const timer = setInterval(() => {
-            setDisplayedText((prev) => prev + text.charAt(i))
-            i++
-            if (i >= text.length) clearInterval(timer)
-        }, speed)
-        return () => clearInterval(timer)
-    }, [text, speed])
+        const currentWord = words[wordIndex]
+        let timeout: NodeJS.Timeout
+
+        if (!isDeleting && displayedText === currentWord) {
+            // Pause before deleting
+            timeout = setTimeout(() => {
+                setIsDeleting(true)
+            }, pauseTime)
+        } else if (isDeleting && displayedText === '') {
+            // Move to next word
+            setWordIndex((prev) => (prev + 1) % words.length)
+            setIsDeleting(false)
+        } else {
+            // Typing or deleting
+            const speed = isDeleting ? deletingSpeed : typingSpeed
+            timeout = setTimeout(() => {
+                if (isDeleting) {
+                    setDisplayedText((prev) => prev.slice(0, -1))
+                } else {
+                    setDisplayedText((prev) => currentWord.slice(0, prev.length + 1))
+                }
+            }, speed)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [displayedText, wordIndex, isDeleting, words, typingSpeed, deletingSpeed, pauseTime])
+
     return displayedText
 }
 
 // --- COMPONENT ---
 
 export function HeroSection() {
-    const subtitle = useTypingEffect("Full-Stack Engineer • Creative Technologist", 40)
+    const typewriterText = useTypewriter(TYPEWRITER_ROLES, 50, 30, 2000)
 
     const scrollToAbout = () => {
         document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
@@ -76,13 +103,13 @@ export function HeroSection() {
                     </motion.div>
 
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-gray-900 mb-2">
-                        I&apos;M <span className="text-amber-500">THE</span> <br />
+                        I&apos;M <br />
                         <span className="text-gray-900">Kamalesh</span> <span className="text-gray-500">Acharya</span>
                     </h1>
 
                     <div className="h-8 mt-4 mb-6">
                         <p className="text-xl md:text-2xl font-medium text-gray-600">
-                            {subtitle}
+                            {typewriterText}
                             <span className="inline-block w-[2px] h-6 bg-amber-500 ml-1 animate-blink align-middle" />
                         </p>
                     </div>
