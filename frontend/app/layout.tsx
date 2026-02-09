@@ -17,9 +17,6 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Kamalesh Acharya | Full-Stack Engineer & Creative Technologist",
   description: "Personal portfolio of Kamalesh Acharya - Full-Stack Engineer specializing in MERN, C++, HFT systems, and creative technology solutions",
-  verification: {
-    google: "o_M5Iv7V9TKz_aNEpuQ0jTPbewdksVvSEgydRtydbHc",
-  },
 };
 
 export default function RootLayout({
@@ -29,6 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="o_M5Iv7V9TKz_aNEpuQ0jTPbewdksVvSEgydRtydbHc"
+        />
+      </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-neutral-100 text-neutral-900 relative`}
       >
