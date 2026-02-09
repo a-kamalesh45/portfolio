@@ -13,9 +13,13 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
+
 export const metadata: Metadata = {
   title: "Kamalesh Acharya | Full-Stack Engineer & Creative Technologist",
   description: "Personal portfolio of Kamalesh Acharya - Full-Stack Engineer specializing in MERN, C++, HFT systems, and creative technology solutions",
+  verification: {
+    google: "o_M5Iv7V9TKz_aNEpuQ0jTPbewdksVvSEgydRtydbHc",
+  },
 };
 
 export default function RootLayout({
