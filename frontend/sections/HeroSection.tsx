@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react'
 import { personalInfo } from '@/data/content'
-import { useState, useEffect } from 'react'
+import { GlitchText } from '@/components/ui/GlitchText'
+import { SlotMachine } from '@/components/ui/SlotMachine'
 
 // --- CONSTANTS & ASSETS ---
 
@@ -16,56 +17,17 @@ const socialIcons = [
 
 const BLOB_PATH = "M65.4,-37.9C79.2,-13.9,81,17,68.1,38C55.2,59.1,27.6,70.5,1.5,69.6C-24.6,68.8,-49.3,55.7,-56,38.2C-62.6,20.7,-51.3,-1.2,-39,-24.4C-26.7,-47.6,-13.3,-72,6.2,-75.6C25.8,-79.2,51.6,-62,65.4,-37.9Z"
 
-const TYPEWRITER_ROLES = [
-    "Full-Stack Engineer",
-    "Creative Technologist"
+const WORD_PAIRS = [
+    { left: 'SYSTEMS', right: 'CREATIVITY' },
+    { left: 'LOGIC', right: 'CHAOS' },
+    { left: 'DESIGN', right: 'ENGINEERING' },
 ]
-
-// --- HOOKS ---
-
-function useTypewriter(words: string[], typingSpeed: number = 50, deletingSpeed: number = 30, pauseTime: number = 2000) {
-    const [displayedText, setDisplayedText] = useState('')
-    const [wordIndex, setWordIndex] = useState(0)
-    const [isDeleting, setIsDeleting] = useState(false)
-
-    useEffect(() => {
-        const currentWord = words[wordIndex]
-        let timeout: NodeJS.Timeout
-
-        if (!isDeleting && displayedText === currentWord) {
-            // Pause before deleting
-            timeout = setTimeout(() => {
-                setIsDeleting(true)
-            }, pauseTime)
-        } else if (isDeleting && displayedText === '') {
-            // Move to next word
-            setWordIndex((prev) => (prev + 1) % words.length)
-            setIsDeleting(false)
-        } else {
-            // Typing or deleting
-            const speed = isDeleting ? deletingSpeed : typingSpeed
-            timeout = setTimeout(() => {
-                if (isDeleting) {
-                    setDisplayedText((prev) => prev.slice(0, -1))
-                } else {
-                    setDisplayedText((prev) => currentWord.slice(0, prev.length + 1))
-                }
-            }, speed)
-        }
-
-        return () => clearTimeout(timeout)
-    }, [displayedText, wordIndex, isDeleting, words, typingSpeed, deletingSpeed, pauseTime])
-
-    return displayedText
-}
 
 // --- COMPONENT ---
 
 export function HeroSection() {
-    const typewriterText = useTypewriter(TYPEWRITER_ROLES, 50, 30, 2000)
-
-    const scrollToAbout = () => {
-        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+    const scrollToWork = () => {
+        document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
     }
 
     return (
@@ -93,49 +55,135 @@ export function HeroSection() {
 
                 {/* === LEFT CONTENT === */}
                 <div className="relative z-30 w-full lg:w-1/2 py-20 lg:py-0">
+
+                    {/* ID Badge / Metadata */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="mb-8 font-mono text-xs md:text-sm text-gray-500 tracking-wide flex items-center gap-1"
+                    >
+                        <span className="text-orange-500">::</span>
+                        <span>24CE10065</span>
+                        <span className="text-gray-400 mx-1">//</span>
+                        <span>IIT KHARAGPUR</span>
+                        <span className="text-gray-400 mx-1">//</span>
+                        <span className="text-green-600">IN_FLOW_STATE</span>
+                        <motion.span
+                            className="inline-block w-1.5 h-3 bg-gray-400 ml-1"
+                            animate={{ opacity: [1, 0, 1] }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        >
+                            █
+                        </motion.span>
+                    </motion.div>
+
+                    {/* The Name - Glitch Effect */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        <GlitchText
+                            text="KAMALESH ACHARYA"
+                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight text-gray-900 cursor-pointer select-none"
+                            decodeOnLoad={true}
+                            decodeOnHover={true}
+                        />
+                    </motion.div>
+
+                    {/* Dynamic Role - Slot Machine */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-white/40 backdrop-blur-[10px] border border-white/20 shadow-sm transition-all duration-300 hover:bg-white/60"
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                        className="mt-6 mb-8"
                     >
-                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgb(34,197,94)]" />
-                        <span className="text-sm font-medium text-gray-600">Available for opportunities</span>
+                        <SlotMachine
+                            wordPairs={WORD_PAIRS}
+                            interval={2500}
+                            className="text-xl md:text-2xl"
+                        />
                     </motion.div>
 
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-gray-900 mb-2">
-                        I&apos;M <br />
-                        <span className="text-gray-900">Kamalesh</span> <span className="text-gray-500">Acharya</span>
-                    </h1>
+                    {/* Tagline */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                        className="text-base md:text-lg text-gray-600 max-w-md leading-relaxed mb-10 font-light"
+                    >
+                        Building robust systems and crafting elegant digital experiences.
+                        From high-performance platforms to modern web applications — where engineering meets creativity.
+                    </motion.p>
 
-                    <div className="h-8 mt-4 mb-6">
-                        <p className="text-xl md:text-2xl font-medium text-gray-600">
-                            {typewriterText}
-                            <span className="inline-block w-[2px] h-6 bg-amber-500 ml-1 animate-blink align-middle" />
-                        </p>
-                    </div>
-
-                    <p className="text-lg text-gray-500 max-w-md leading-relaxed mb-10">
-                        I build robust systems and craft elegant digital experiences. From high-frequency
-                        trading platforms to modern web applications — engineering meets creativity.
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-5">
-                        <button
-                            onClick={scrollToAbout}
-                            className="px-8 py-4 bg-gray-900 text-white rounded-xl font-medium hover:bg-black transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                    {/* CTA Buttons */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.9 }}
+                        className="flex flex-wrap items-center gap-4"
+                    >
+                        {/* Primary Button */}
+                        <motion.button
+                            onClick={scrollToWork}
+                            className="group relative px-8 py-4 bg-gray-900 text-white font-mono text-sm uppercase tracking-wider overflow-hidden"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            Discover More <ArrowDown size={18} />
-                        </button>
-                        <a
+                            <span className="relative z-10 flex items-center gap-2">
+                                See My Work
+                                <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                            </span>
+                            {/* Glitch effect on hover */}
+                            <motion.div
+                                className="absolute inset-0 bg-white"
+                                initial={{ x: '-100%' }}
+                                whileHover={{ x: 0 }}
+                                transition={{ duration: 0.3 }}
+                            />
+                            <motion.span
+                                className="absolute inset-0 flex items-center justify-center font-mono text-sm uppercase tracking-wider text-gray-900 opacity-0 group-hover:opacity-100"
+                                initial={{ opacity: 0 }}
+                                whileHover={{ opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                See My Work <ArrowDown size={16} className="ml-2" />
+                            </motion.span>
+                        </motion.button>
+
+                        {/* Secondary Button */}
+                        <motion.a
                             href="#contact"
-                            className="px-8 py-4 bg-white border border-gray-200 text-gray-900 rounded-xl font-medium hover:bg-gray-50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1"
+                            className="group relative px-8 py-4 bg-transparent border border-gray-300 text-gray-900 font-mono text-sm uppercase tracking-wider overflow-hidden"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            Let&apos;s Talk
-                        </a>
-                    </div>
+                            <span className="relative z-10">Contact</span>
+                            {/* Orange border fill on hover */}
+                            <motion.div
+                                className="absolute inset-0 border-2 border-orange-500"
+                                initial={{ scale: 0, opacity: 0 }}
+                                whileHover={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                            />
+                            <motion.div
+                                className="absolute inset-0 bg-orange-500/5"
+                                initial={{ opacity: 0 }}
+                                whileHover={{ opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        </motion.a>
+                    </motion.div>
 
-                    <div className="mt-12 flex items-center gap-4">
-                        <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">Find me on</span>
+                    {/* Social Links */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 1.1 }}
+                        className="mt-12 flex items-center gap-4"
+                    >
+                        <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Connect</span>
                         <div className="w-8 h-[1px] bg-gray-300"></div>
                         <div className="flex gap-3">
                             {socialIcons.map((social) => {
@@ -146,14 +194,14 @@ export function HeroSection() {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-2 text-gray-400 hover:text-amber-500 transition-colors"
+                                        className="p-2 text-gray-400 hover:text-orange-500 transition-colors"
                                     >
                                         <Icon size={20} />
                                     </a>
                                 )
                             })}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* === RIGHT VISUAL AREA === */}

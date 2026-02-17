@@ -28,12 +28,23 @@ export function TerminalContact() {
         setIsSubmitting(true)
 
         try {
-            // Simulate form submission
-            await new Promise((resolve) => setTimeout(resolve, 1500))
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to send message')
+            }
+
             setSubmitStatus('success')
             setFormData({ name: '', email: '', message: '' })
             setTimeout(() => setSubmitStatus('idle'), 3000)
-        } catch {
+        } catch (error) {
+            console.error('Error submitting form:', error)
             setSubmitStatus('error')
             setTimeout(() => setSubmitStatus('idle'), 3000)
         } finally {
@@ -148,38 +159,46 @@ export function TerminalContact() {
                                     {/* Line 1: Name */}
                                     <div className="flex items-center gap-4 group">
                                         <span className="text-neutral-600 w-6 text-right flex-shrink-0">1</span>
-                                        <div className="flex-1">
+                                        <div className="flex-1 flex items-center">
                                             <span className="text-pink-400">const</span>
                                             <span className="text-neutral-400"> name </span>
                                             <span className="text-orange-400">=</span>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleInputChange}
-                                                placeholder='""'
-                                                className="ml-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded text-emerald-400 placeholder-neutral-600 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 font-mono text-sm inline-flex"
-                                                required
-                                            />
+                                            <div className="ml-2 relative bg-neutral-800 border border-neutral-700 rounded px-3 py-2 focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 flex-1">
+                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    value={formData.name}
+                                                    onChange={handleInputChange}
+                                                    placeholder=""
+                                                    className="w-full bg-transparent border-none outline-none text-emerald-400 placeholder-neutral-600 font-mono text-sm pl-3 pr-3"
+                                                    required
+                                                />
+                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                            </div>
                                         </div>
                                     </div>
 
                                     {/* Line 2: Email */}
                                     <div className="flex items-center gap-4 group">
                                         <span className="text-neutral-600 w-6 text-right flex-shrink-0">2</span>
-                                        <div className="flex-1">
+                                        <div className="flex-1 flex items-center">
                                             <span className="text-pink-400">const</span>
                                             <span className="text-neutral-400"> email </span>
                                             <span className="text-orange-400">=</span>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                placeholder='""'
-                                                className="ml-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded text-emerald-400 placeholder-neutral-600 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 font-mono text-sm inline-flex"
-                                                required
-                                            />
+                                            <div className="ml-2 relative bg-neutral-800 border border-neutral-700 rounded px-3 py-2 focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 flex-1">
+                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleInputChange}
+                                                    placeholder=""
+                                                    className="w-full bg-transparent border-none outline-none text-emerald-400 placeholder-neutral-600 font-mono text-sm pl-3 pr-3"
+                                                    required
+                                                />
+                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                            </div>
                                         </div>
                                     </div>
 
