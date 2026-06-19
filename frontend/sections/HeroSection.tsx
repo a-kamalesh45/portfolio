@@ -2,10 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Linkedin, Twitter } from 'lucide-react'
 import { personalInfo } from '@/data/content'
-import { GlitchText } from '@/components/ui/GlitchText'
-import { SlotMachine } from '@/components/ui/SlotMachine'
 
 // --- CONSTANTS & ASSETS ---
 
@@ -17,11 +15,17 @@ const socialIcons = [
 
 const BLOB_PATH = "M65.4,-37.9C79.2,-13.9,81,17,68.1,38C55.2,59.1,27.6,70.5,1.5,69.6C-24.6,68.8,-49.3,55.7,-56,38.2C-62.6,20.7,-51.3,-1.2,-39,-24.4C-26.7,-47.6,-13.3,-72,6.2,-75.6C25.8,-79.2,51.6,-62,65.4,-37.9Z"
 
-const WORD_PAIRS = [
-    { left: 'SYSTEMS', right: 'CREATIVITY' },
-    { left: 'LOGIC', right: 'CHAOS' },
-    { left: 'DESIGN', right: 'ENGINEERING' },
-]
+// Typography constants for overlay text alignment
+const OVERLAY_TEXT_STYLES = {
+    engineer: {
+        fontSize: 'clamp(100px, 12vw, 140px)',
+        lineHeight: '0.9',
+    },
+    creator: {
+        fontSize: 'clamp(80px, 10vw, 110px)',
+        lineHeight: '0.9',
+    },
+}
 
 // --- COMPONENT ---
 
@@ -33,7 +37,7 @@ export function HeroSection() {
     return (
         <section
             id="home"
-            className="min-h-screen relative overflow-hidden bg-neutral-100 flex items-center"
+            className="min-h-screen relative overflow-hidden bg-neutral-100 flex items-center pt-28 lg:pt-32"
         >
             {/* 1. BACKGROUND ACCENTS */}
             <div className="absolute inset-0 pointer-events-none">
@@ -44,30 +48,43 @@ export function HeroSection() {
                         filter: 'blur(40px)',
                     }}
                 />
-                <div className="absolute inset-0 opacity-[0.03]" style={{
+                <div className="absolute inset-0 opacity-[0.015]" style={{
                     backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
-                    backgroundSize: '40px 40px'
+                    backgroundSize: '60px 60px'
                 }} />
             </div>
 
             {/* 2. MAIN CONTAINER */}
-            <div className="relative w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+            <div className="relative w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-12">
 
                 {/* === LEFT CONTENT === */}
-                <div className="relative z-30 w-full lg:w-1/2 py-20 lg:py-0">
+                <div className="relative z-30 w-full lg:w-[48%] max-w-[560px] py-20 lg:py-0">
+
+                    {/* Vertical Accent Line - Engineering Panel Structure */}
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-orange-500/40 to-transparent hidden md:block" />
+                    <div className="absolute left-0 top-[15%] w-[2px] h-[70%] bg-orange-500/20 hidden md:block" />
+
+                    {/* Blueprint Grid Backdrop */}
+                    <div
+                        className="absolute inset-0 opacity-[0.015] pointer-events-none"
+                        style={{
+                            backgroundImage: 'linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px)',
+                            backgroundSize: '20px 20px'
+                        }}
+                    />
 
                     {/* ID Badge / Metadata */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="mb-8 font-mono text-xs md:text-sm text-gray-500 tracking-wide flex items-center gap-1"
+                        className="mb-10 font-mono text-xs md:text-sm text-gray-500 tracking-wide flex items-center gap-1 md:pl-6"
                     >
                         <span className="text-orange-500">::</span>
                         <span>24CE10065</span>
-                        <span className="text-gray-400 mx-1">//</span>
+                        <span className="text-gray-400 mx-1">/</span><span className="text-gray-400 mx-1">/</span>
                         <span>IIT KHARAGPUR</span>
-                        <span className="text-gray-400 mx-1">//</span>
+                        <span className="text-gray-400 mx-1">/</span><span className="text-gray-400 mx-1">/</span>
                         <span className="text-green-600">IN_FLOW_STATE</span>
                         <motion.span
                             className="inline-block w-1.5 h-3 bg-gray-400 ml-1"
@@ -78,62 +95,128 @@ export function HeroSection() {
                         </motion.span>
                     </motion.div>
 
-                    {/* The Name - Glitch Effect */}
+                    {/* The Name - Elegant Typography */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
+                        className="mb-6 md:pl-6"
                     >
-                        <GlitchText
-                            text="KAMALESH ACHARYA"
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight text-gray-900 cursor-pointer select-none"
-                            decodeOnLoad={true}
-                            decodeOnHover={true}
-                        />
+                        <div className="relative">
+                            {/* First Name */}
+                            <motion.h1
+                                className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none"
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.3 }}
+                            >
+                                <span className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
+                                    KAMALESH
+                                </span>
+                            </motion.h1>
+
+                            {/* Last Name with Accent */}
+                            <motion.h1
+                                className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mt-2"
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                            >
+                                <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
+                                    ACHARYA
+                                </span>
+                            </motion.h1>
+
+                            {/* Subtle Underline Accent */}
+                            <motion.div
+                                className="h-1 bg-gradient-to-r from-orange-500 to-transparent mt-3"
+                                initial={{ width: 0 }}
+                                animate={{ width: '140px' }}
+                                transition={{ duration: 0.8, delay: 0.8 }}
+                            />
+
+                            {/* Background Text Shimmer Effect */}
+                            <div className="absolute inset-0 -z-10 opacity-5">
+                                <div className="text-[120px] md:text-[140px] lg:text-[180px] font-black tracking-tighter text-gray-900 leading-none">
+                                    KA
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
 
-                    {/* Dynamic Role - Slot Machine */}
+                    {/* Engineering Typography Hierarchy */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        className="mt-6 mb-8"
+                        className="mt-8 mb-8 md:pl-6"
                     >
-                        <SlotMachine
-                            wordPairs={WORD_PAIRS}
-                            interval={2500}
-                            className="text-xl md:text-2xl"
-                        />
+                        <div className="flex flex-col gap-2">
+                            <h2 className="text-2xl md:text-3xl font-light tracking-wide text-gray-500 uppercase">
+                                DESIGN
+                            </h2>
+                            <div className="flex items-center gap-4">
+                                <span className="text-orange-500 text-3xl md:text-4xl font-light">×</span>
+                                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-900 uppercase leading-none">
+                                    ENGINEERING
+                                </h1>
+                            </div>
+                        </div>
                     </motion.div>
 
-                    {/* Tagline */}
-                    <motion.p
+                    {/* System Description Block */}
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        className="text-base md:text-lg text-gray-600 max-w-md leading-relaxed mb-10 font-light"
+                        className="mb-10 md:pl-6 space-y-1"
                     >
-                        Building robust systems and crafting elegant digital experiences.
-                        From high-performance platforms to modern web applications — where engineering meets creativity.
-                    </motion.p>
+                        {/* Section Label */}
+                        <div className="flex items-center gap-2 mb-4">
+                            <span className="font-mono text-[10px] tracking-[0.2em] text-gray-400 uppercase">System Overview</span>
+                            <div className="flex-1 h-[1px] bg-gray-200" />
+                        </div>
 
-                    {/* CTA Buttons */}
+                        {/* Description Lines */}
+                        <p className="text-base md:text-lg text-gray-700 font-normal leading-relaxed">
+                            Building products that ship.<br />
+                            Studying Civil Engineering at IIT KGP.
+                        </p>
+
+                        {/* Feature List */}
+                        <div className="pt-4 space-y-2 text-sm md:text-base text-gray-600 font-light">
+                            <div className="flex items-start gap-3">
+                                <span className="text-orange-500 mt-1">→</span>
+                                <span>React & Next.js frontends</span>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <span className="text-orange-500 mt-1">→</span>
+                                <span>MERN stack full-stack apps</span>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <span className="text-orange-500 mt-1">→</span>
+                                <span>Shipped for real users</span>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* CTA Buttons - Technical Style */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.9 }}
-                        className="flex flex-wrap items-center gap-4"
+                        className="flex flex-wrap items-center gap-4 md:pl-6"
                     >
                         {/* Primary Button */}
                         <motion.button
                             onClick={scrollToWork}
-                            className="group relative px-8 py-4 bg-gray-900 text-white font-mono text-sm uppercase tracking-wider overflow-hidden"
+                            className="group relative px-8 py-4 bg-gray-900 text-white font-mono text-xs uppercase tracking-[0.15em] overflow-hidden"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                         >
                             <span className="relative z-10 flex items-center gap-2">
-                                See My Work
-                                <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                                Explore Projects
+                                <span className="text-orange-400">↓</span>
                             </span>
                             {/* Glitch effect on hover */}
                             <motion.div
@@ -143,23 +226,23 @@ export function HeroSection() {
                                 transition={{ duration: 0.3 }}
                             />
                             <motion.span
-                                className="absolute inset-0 flex items-center justify-center font-mono text-sm uppercase tracking-wider text-gray-900 opacity-0 group-hover:opacity-100"
+                                className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-[0.15em] text-gray-900 opacity-0 group-hover:opacity-100"
                                 initial={{ opacity: 0 }}
                                 whileHover={{ opacity: 1 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                See My Work <ArrowDown size={16} className="ml-2" />
+                                Explore Projects <span className="text-orange-500 ml-2">↓</span>
                             </motion.span>
                         </motion.button>
 
                         {/* Secondary Button */}
                         <motion.a
                             href="#contact"
-                            className="group relative px-8 py-4 bg-transparent border border-gray-300 text-gray-900 font-mono text-sm uppercase tracking-wider overflow-hidden"
+                            className="group relative px-8 py-4 bg-transparent border border-gray-300 text-gray-900 font-mono text-xs uppercase tracking-[0.15em] overflow-hidden"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            <span className="relative z-10">Contact</span>
+                            <span className="relative z-10">Initiate Contact</span>
                             {/* Orange border fill on hover */}
                             <motion.div
                                 className="absolute inset-0 border-2 border-orange-500"
@@ -181,9 +264,9 @@ export function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 1.1 }}
-                        className="mt-12 flex items-center gap-4"
+                        className="mt-12 flex items-center gap-4 md:pl-6"
                     >
-                        <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Connect</span>
+                        <span className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.2em]">Connect</span>
                         <div className="w-8 h-[1px] bg-gray-300"></div>
                         <div className="flex gap-3">
                             {socialIcons.map((social) => {
@@ -209,7 +292,7 @@ export function HeroSection() {
 
                     {/* Subtle Background Accent Blob */}
                     <div className="absolute inset-0 flex items-center justify-center z-0 translate-x-12 translate-y-4">
-                        <svg viewBox="0 0 200 200" className="w-[130%] h-[130%] fill-amber-100/50 opacity-60">
+                        <svg viewBox="0 0 200 200" className="w-[115%] h-[115%] fill-amber-100/50 opacity-60">
                             <defs>
                                 <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stopColor="#fef3c7" />
@@ -237,20 +320,20 @@ export function HeroSection() {
                     >
                         {/* Shared typography variables for perfect alignment */}
                         <h2
-                            className="font-black uppercase tracking-tighter text-amber-500/20"
+                            className="font-black uppercase tracking-tighter text-amber-500/15"
                             style={{
-                                fontSize: 'clamp(100px, 12vw, 140px)',
-                                lineHeight: '0.9',
+                                fontSize: OVERLAY_TEXT_STYLES.engineer.fontSize,
+                                lineHeight: OVERLAY_TEXT_STYLES.engineer.lineHeight,
                                 fontFamily: 'inherit',
                             }}
                         >
                             ENGINEER
                         </h2>
                         <h2
-                            className="font-black uppercase tracking-tight text-gray-700/20 ml-16 mt-2"
+                            className="font-black uppercase tracking-tight text-gray-700/15 ml-16 mt-2"
                             style={{
-                                fontSize: 'clamp(80px, 10vw, 110px)',
-                                lineHeight: '0.9',
+                                fontSize: OVERLAY_TEXT_STYLES.creator.fontSize,
+                                lineHeight: OVERLAY_TEXT_STYLES.creator.lineHeight,
                                 fontFamily: 'inherit',
                             }}
                         >
@@ -263,7 +346,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, y: 50, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
-                        className="absolute right-[5%] bottom-0 z-20 w-[580px] h-[750px]"
+                        className="absolute right-[5%] bottom-0 z-20 w-[520px] h-[680px]"
                     >
                         <div className="relative w-full h-full">
                             {/* The cutout image with transparent background */}
@@ -296,8 +379,8 @@ export function HeroSection() {
                         <h2
                             className="font-black uppercase tracking-tighter"
                             style={{
-                                fontSize: 'clamp(100px, 12vw, 140px)',
-                                lineHeight: '0.9',
+                                fontSize: OVERLAY_TEXT_STYLES.engineer.fontSize,
+                                lineHeight: OVERLAY_TEXT_STYLES.engineer.lineHeight,
                                 fontFamily: 'inherit',
                                 WebkitTextStroke: '2px #f59f0b69',
                                 WebkitTextFillColor: 'transparent',
@@ -309,8 +392,8 @@ export function HeroSection() {
                         <h2
                             className="font-black uppercase tracking-tight ml-16 mt-2"
                             style={{
-                                fontSize: 'clamp(80px, 10vw, 110px)',
-                                lineHeight: '0.9',
+                                fontSize: OVERLAY_TEXT_STYLES.creator.fontSize,
+                                lineHeight: OVERLAY_TEXT_STYLES.creator.lineHeight,
                                 fontFamily: 'inherit',
                                 WebkitTextStroke: '1.5px #3741519d',
                                 WebkitTextFillColor: 'transparent',

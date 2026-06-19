@@ -46,7 +46,7 @@ export function SlotMachine({
                     <span className="text-gray-900">
                         {wordPairs[currentIndex].left}
                     </span>
-                    <span className="text-gray-400 font-mono text-base">//</span>
+                    <span className="text-gray-400 font-mono text-base">{`//`}</span>
                     <span className="text-orange-500">
                         {wordPairs[currentIndex].right}
                     </span>

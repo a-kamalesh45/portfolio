@@ -85,9 +85,10 @@ Sent from your portfolio contact form on ${new Date().toLocaleString()}
             { status: 200 }
         )
     } catch (error) {
-        console.error('Error sending email:', error)
+        const message = error instanceof Error ? error.message : String(error)
+        console.error('Nodemailer error:', message)
         return NextResponse.json(
-            { error: 'Failed to send email' },
+            { error: 'Failed to send email', detail: message },
             { status: 500 }
         )
     }

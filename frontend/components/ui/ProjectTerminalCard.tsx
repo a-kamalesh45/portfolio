@@ -92,7 +92,8 @@ export function ProjectTerminalCard({
                 {/* Technical Description */}
                 <div className="flex-1 overflow-hidden">
                     <p className="font-mono text-xs md:text-sm text-neutral-400 leading-relaxed mb-4">
-                        <span className="text-neutral-600">//</span> Technical Overview
+                        <span className="text-neutral-600">/</span>
+                        <span className="text-neutral-600">/</span> {`Technical Overview`}
                     </p>
                     <p className="text-sm text-neutral-300 leading-relaxed">
                         {description}

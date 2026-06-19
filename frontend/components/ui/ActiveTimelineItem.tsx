@@ -68,7 +68,7 @@ export function ActiveTimelineItem({ item, index }: ActiveTimelineItemProps) {
                     >
                         {/* Date as Comment */}
                         <p className="font-mono text-xs md:text-sm text-primary-600 mb-2">
-                            // {item.duration}
+                            {`// ${item.duration}`}
                         </p>
 
                         {/* Role Title */}
@@ -119,7 +119,7 @@ export function ActiveTimelineItem({ item, index }: ActiveTimelineItemProps) {
                             {/* Date */}
                             <div className="flex items-center gap-2">
                                 <span className="text-neutral-600 w-6">1</span>
-                                <span className="text-primary-500">// {item.duration}</span>
+                                <span className="text-primary-500">{`// ${item.duration}`}</span>
                             </div>
 
                             {/* Role */}

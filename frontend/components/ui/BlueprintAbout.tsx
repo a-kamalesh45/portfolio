@@ -124,7 +124,7 @@ export function BlueprintAbout() {
                     className="mb-20"
                 >
                     <div className="font-mono text-xs md:text-sm text-primary-600 tracking-widest uppercase mb-4">
-                        // Get to Know Me
+                        {`// Get to Know Me`}
                     </div>
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-neutral-900">
                         {aboutMe.title}
@@ -170,7 +170,7 @@ export function BlueprintAbout() {
 
                             <div className="pl-8 pt-6 pb-6 pr-6">
                                 <div className="font-mono text-xs text-primary-600 mb-6 tracking-wider">
-                                    [COORDINATES: 24.11°N • ROLE: SENIOR_ENGINEER]
+                                    [IIT KHARAGPUR • CIVIL ENGINEERING • 2024–PRESENT]
                                 </div>
 
                                 <div className="space-y-6 text-neutral-700 leading-relaxed">
@@ -225,7 +225,7 @@ export function BlueprintAbout() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                 >
                     <div className="font-mono text-xs md:text-sm text-primary-600 tracking-widest uppercase mb-12">
-                        // What I Do
+                        {`// What I Do`}
                     </div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

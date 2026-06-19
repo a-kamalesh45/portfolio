@@ -95,10 +95,10 @@ export function TerminalContact() {
                             className="mb-8"
                         >
                             <div className="font-mono text-xs md:text-sm text-primary-600 tracking-widest uppercase mb-6">
-                                // Let's Build
+                                {`// Let's Build`}
                             </div>
                             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
-                                Let's build something{' '}
+                                Let&apos;s build something{' '}
                                 <span className="text-primary-500">dangerous?</span>
                             </h2>
                         </motion.div>
@@ -109,7 +109,7 @@ export function TerminalContact() {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8 max-w-md"
                         >
-                            If your problem involves scale, performance optimization, or pure engineering chaos, I'm ready to dive in. Let's talk.
+                            If your problem involves scale, performance optimization, or pure engineering chaos, I&apos;m ready to dive in. Let&apos;s talk.
                         </motion.p>
 
                         <motion.div
@@ -164,7 +164,7 @@ export function TerminalContact() {
                                             <span className="text-neutral-400"> name </span>
                                             <span className="text-orange-400">=</span>
                                             <div className="ml-2 relative bg-neutral-800 border border-neutral-700 rounded px-3 py-2 focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 flex-1">
-                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">&quot;</span>
                                                 <input
                                                     type="text"
                                                     name="name"
@@ -174,7 +174,7 @@ export function TerminalContact() {
                                                     className="w-full bg-transparent border-none outline-none text-emerald-400 placeholder-neutral-600 font-mono text-sm pl-3 pr-3"
                                                     required
                                                 />
-                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">&quot;</span>
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@ export function TerminalContact() {
                                             <span className="text-neutral-400"> email </span>
                                             <span className="text-orange-400">=</span>
                                             <div className="ml-2 relative bg-neutral-800 border border-neutral-700 rounded px-3 py-2 focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 flex-1">
-                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <span className="text-yellow-400 font-mono text-sm absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">&quot;</span>
                                                 <input
                                                     type="email"
                                                     name="email"
@@ -197,7 +197,7 @@ export function TerminalContact() {
                                                     className="w-full bg-transparent border-none outline-none text-emerald-400 placeholder-neutral-600 font-mono text-sm pl-3 pr-3"
                                                     required
                                                 />
-                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">"</span>
+                                                <span className="text-yellow-400 font-mono text-sm absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">&quot;</span>
                                             </div>
                                         </div>
                                     </div>

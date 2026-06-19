@@ -195,6 +195,13 @@ export function LivingBlueprint({ zones }: LivingBlueprintProps) {
 
                         const pathD = `M ${startX} ${startY} C ${controlPoint1X} ${startY}, ${controlPoint2X} ${endY}, ${endX} ${endY}`
 
+                        // Randomise packet timing per connection
+                        const seed = (idx * 7 + 13) % 17
+                        const randomDelay = (seed / 17 * 4).toFixed(2)          // 0–4s staggered start
+                        const baseDur = isActive ? 1.5 : 3
+                        const jitter = ((seed % 5) - 2) * 0.3                    // ±0.6s variation
+                        const packetDur = Math.max(1, baseDur + jitter).toFixed(2)
+
                         return (
                             <g key={`${conn.from}-${conn.to}-${idx}`}>
                                 {/* Base Path */}
@@ -217,7 +224,8 @@ export function LivingBlueprint({ zones }: LivingBlueprintProps) {
                                     filter="blur(0.5px)"
                                 >
                                     <animateMotion
-                                        dur={isActive ? "1.5s" : "3s"}
+                                        dur={`${packetDur}s`}
+                                        begin={`${randomDelay}s`}
                                         repeatCount="indefinite"
                                         path={pathD}
                                     />

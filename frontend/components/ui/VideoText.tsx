@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useEffect, useRef, useState } from 'react'
 
 interface VideoTextProps {
     text: string[]
@@ -19,7 +19,8 @@ export function VideoText({
     const animationRef = useRef<number>(0)
     const [mounted, setMounted] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true)
     }, [])
 

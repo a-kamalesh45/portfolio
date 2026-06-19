@@ -8,7 +8,6 @@ const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'Work', href: '#portfolio' },
     { label: 'About', href: '#about' },
-    { label: 'Resume', href: '#resume' },
 ]
 
 const fonts = ['Foldit', 'Rubik Glitch Pop', 'Tilt Prism']
@@ -124,7 +123,7 @@ export function Navbar() {
                             active:scale-95
                         "
                     >
-                        Let's Talk
+                        Let&apos;s Talk
                     </motion.button>
                 </motion.div>
             </nav>
@@ -216,7 +215,7 @@ export function Navbar() {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
-                                    Let's Talk
+                                    Let&apos;s Talk
                                 </motion.button>
                             </div>
                         </motion.div>

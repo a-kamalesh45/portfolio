@@ -15,8 +15,8 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "Kamalesh Acharya | Full-Stack Engineer & Creative Technologist",
-  description: "Personal portfolio of Kamalesh Acharya - Full-Stack Engineer specializing in MERN, C++, HFT systems, and creative technology solutions",
+  title: "Kamalesh Acharya | Frontend Developer & IIT Kharagpur",
+  description: "Portfolio of Kamalesh Acharya — Frontend Developer and Civil Engineering undergraduate at IIT Kharagpur. Building production React and Next.js applications.",
 };
 
 export default function RootLayout({

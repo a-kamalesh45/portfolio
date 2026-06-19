@@ -46,13 +46,13 @@ export function TestimonialsSection() {
                     className="mb-16"
                 >
                     <div className="font-mono text-xs md:text-sm text-primary-600 tracking-widest uppercase mb-6">
-                        // Peer Feedback
+                        {`// Peer Feedback`}
                     </div>
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-neutral-900 mb-6">
                         What People Say
                     </h2>
                     <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-2xl">
-                        Feedback from amazing collaborators and teams I've worked with.
+                        Feedback from amazing collaborators and teams I&apos;ve worked with.
                     </p>
                 </motion.div>
 
@@ -65,7 +65,7 @@ export function TestimonialsSection() {
                 >
                     {testimonialsData.map((testimonial, index) => (
                         <PRTestimonialCard
-                            key={testimonial.id}
+                            key={index}
                             testimonial={testimonial}
                             index={index}
                         />

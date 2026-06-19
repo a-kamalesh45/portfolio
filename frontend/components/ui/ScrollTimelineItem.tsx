@@ -156,8 +156,9 @@ export function ScrollTimelineItem({ item, index, totalItems }: ScrollTimelineIt
 
                             {/* Duration */}
                             <div className="flex items-center gap-2 pl-4 text-neutral-500">
-                                <span className="text-neutral-600">//</span>
-                                <span>{item.duration}</span>
+                                <span className="text-neutral-600">/</span>
+                                <span className="text-neutral-600">/</span>
+                                <span>{`${item.duration}`}</span>
                             </div>
 
                             {/* Description as console logs */}

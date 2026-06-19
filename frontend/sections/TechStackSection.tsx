@@ -18,25 +18,25 @@ export function TechStackSection() {
                     name: 'React',
                     icon: 'react_light.svg',
                     connections: ['Node.js', 'Next.js'],
-                    version: 'v18.2.0',
-                    latency: '~2ms',
-                    status: 'idle'
+                    version: 'UI Library',
+                    latency: 'Component-based',
+                    status: 'active'
                 },
                 {
                     name: 'Next.js',
                     icon: 'nextjs_icon_dark.svg',
                     connections: ['Node.js', 'React'],
-                    version: 'v14.0.1',
-                    latency: '~3ms',
-                    status: 'idle'
+                    version: 'SSR / SSG',
+                    latency: 'Full-stack',
+                    status: 'active'
                 },
                 {
                     name: 'Tailwind CSS',
                     icon: 'tailwindcss.svg',
                     connections: ['React', 'Next.js'],
-                    version: 'v3.4.0',
-                    latency: '<1ms',
-                    status: 'ready'
+                    version: 'Utility CSS',
+                    latency: 'Styling',
+                    status: 'active'
                 },
             ]
         },
@@ -46,71 +46,71 @@ export function TechStackSection() {
                 {
                     name: 'Node.js',
                     icon: 'nodejs.svg',
-                    connections: ['React', 'MongoDB', 'Redis', 'Express'],
-                    version: 'v20.10.0',
-                    latency: '~5ms',
-                    status: 'idle'
+                    connections: ['React', 'MongoDB', 'Express'],
+                    version: 'JS Runtime',
+                    latency: 'Server-side',
+                    status: 'active'
                 },
                 {
                     name: 'Express',
                     icon: 'expressjs.svg',
                     connections: ['Node.js', 'MongoDB'],
-                    version: 'v4.18.2',
-                    latency: '~4ms',
-                    status: 'idle'
+                    version: 'REST APIs',
+                    latency: 'Routing',
+                    status: 'active'
                 },
                 {
                     name: 'C++',
                     icon: 'c-plusplus.svg',
-                    connections: ['Redis', 'Docker', 'Python'],
-                    version: 'C++20',
-                    latency: '<1ms',
-                    status: 'ready'
+                    connections: ['Python'],
+                    version: 'Systems',
+                    latency: 'Low-level',
+                    status: 'active'
                 },
                 {
                     name: 'Python',
                     icon: 'python.svg',
-                    connections: ['MongoDB', 'AWS', 'C++'],
-                    version: 'v3.11.5',
-                    latency: '~8ms',
-                    status: 'idle'
+                    connections: ['MongoDB', 'C++'],
+                    version: 'Scripting',
+                    latency: 'Data / General',
+                    status: 'active'
                 },
             ]
         },
         {
-            title: 'Infrastructure',
+            title: 'Data & Tools',
             techs: [
-                {
-                    name: 'Docker',
-                    icon: 'docker.svg',
-                    connections: ['Node.js', 'C++', 'AWS'],
-                    version: 'v24.0.7',
-                    latency: '~12ms',
-                    status: 'idle'
-                },
-                {
-                    name: 'AWS',
-                    icon: 'aws_light.svg',
-                    connections: ['Docker', 'MongoDB', 'Python'],
-                    version: 'SDK v3',
-                    latency: '~15ms',
-                    status: 'online'
-                },
-                {
-                    name: 'Redis',
-                    icon: 'redis.svg',
-                    connections: ['Node.js', 'C++'],
-                    version: 'v7.2.3',
-                    latency: '~1ms',
-                    status: 'cached'
-                },
                 {
                     name: 'MongoDB',
                     icon: 'mongodb-icon-light.svg',
-                    connections: ['Node.js', 'Python', 'Express'],
-                    version: 'v7.0.4',
-                    latency: '~6ms',
-                    status: 'idle'
+                    connections: ['Node.js', 'Express'],
+                    version: 'NoSQL DB',
+                    latency: 'Document store',
+                    status: 'active'
+                },
+                {
+                    name: 'Git',
+                    icon: 'git.svg',
+                    connections: ['GitHub'],
+                    version: 'Version Control',
+                    latency: 'Source',
+                    status: 'active'
+                },
+                {
+                    name: 'GitHub',
+                    icon: 'github_light.svg',
+                    connections: ['Git'],
+                    version: 'Code Hosting',
+                    latency: 'Collaboration',
+                    status: 'active'
+                },
+                {
+                    name: 'VS Code',
+                    icon: 'vscode.svg',
+                    connections: ['Git'],
+                    version: 'IDE',
+                    latency: 'Editor',
+                    status: 'active'
                 },
             ]
         }
@@ -152,7 +152,7 @@ export function TechStackSection() {
                     className="mb-12 text-center"
                 >
                     <div className="font-mono text-xs md:text-sm text-orange-600 tracking-widest uppercase mb-4">
-                        // Holographic System Schematic
+                        {`// Holographic System Schematic`}
                     </div>
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
                         Architecture Map
