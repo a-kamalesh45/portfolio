@@ -27,19 +27,17 @@ const MISSIONS: Mission[] = [
         description: resumeData.experience[0].description,
         isCurrent: resumeData.experience[0].isCurrent,
         type: 'ACTIVE DEPLOYMENT',
-        bgText: 'FINTECH',
+        bgText: 'FINANCIAL DATA',
         metrics: [
-            { label: 'Companies', value: '1500+' },
-            { label: 'Frontend', value: 'React' },
-            { label: 'Status', value: 'LIVE' },
+            { label: 'Companies', value: '5000+' },
+            { label: 'Frontend', value: 'React + MUI-X' },
+            { label: 'Data Layer', value: 'Node.js' },
         ],
-        code: `// MUI X Data Grid — financial dashboard
-<DataGrid
-  rows={companies}
-  columns={columns}
-  sortingMode="server"
-  filterMode="server"
-  onSortModelChange={fetchData}
+        code: `// React + MUI-X financial dashboard
+<Dashboard
+    source="Excel financial datasets"
+    mode="production"
+    metric="segment-wise trends"
 />`,
         lang: 'tsx',
     },
@@ -51,17 +49,17 @@ const MISSIONS: Mission[] = [
         description: resumeData.experience[1].description,
         isCurrent: resumeData.experience[1].isCurrent,
         type: 'ACTIVE DEPLOYMENT',
-        bgText: 'SPACE',
+        bgText: 'NSSC',
         metrics: [
-            { label: 'Attendees', value: '2000+' },
-            { label: 'Framework', value: 'Next.js' },
-            { label: 'Status', value: 'LIVE' },
+            { label: 'Users', value: '4500+' },
+            { label: 'Teams', value: '300+' },
+            { label: 'Events', value: '10+' },
         ],
-        code: `// Next.js — dynamic event routing
-export async function generateStaticParams() {
-  return events.map((e) => ({
-    slug: e.slug,
-  }))
+        code: `// Next.js website for NSSC
+export const scope = {
+    users: '4500+',
+    teams: '300+',
+    events: '10+',
 }`,
         lang: 'ts',
     },
@@ -73,20 +71,19 @@ export async function generateStaticParams() {
         description: resumeData.experience[2].description,
         isCurrent: resumeData.experience[2].isCurrent,
         type: 'ACTIVE DEPLOYMENT',
-        bgText: 'EVENTS',
+        bgText: 'MENTORSHIP',
         metrics: [
-            { label: 'Participants', value: '2500+' },
-            { label: 'Domain', value: 'Logistics' },
-            { label: 'Status', value: 'ONGOING' },
+            { label: 'Junior Members', value: '13' },
+            { label: 'Focus', value: 'Frontend' },
+            { label: 'Activities', value: 'Hackathon + Workshops' },
         ],
-        code: `// Event coordination checklist
-const phases = [
-  'outreach',
-  'scheduling',
-  'volunteer_mgmt',
-  'on_ground_exec',
-]
-phases.forEach(run)`,
+        code: `// Society mentoring and technical onboarding
+const responsibilities = [
+    'guest_speaker_outreach',
+    'frontend_mentorship',
+    'hackathon_organization',
+    'technical_workshops',
+]`,
         lang: 'js',
     },
 ]

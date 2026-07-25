@@ -21,12 +21,12 @@ frontend/
 ```
 
 ### 2. **Component Features**
-- ✅ Auto-renders all tech icons from config
+- ✅ Auto-renders tech icons from config
 - ✅ Responsive grid (3 cols mobile → 4 tablet → 6 desktop → 8 XL)
 - ✅ Smooth hover effects (scale + brightness)
 - ✅ Dark theme with professional styling
 - ✅ Optimized Next.js Image component
-- ✅ Clean, minimal design perfect for recruiters
+- ✅ Clean, minimal design aligned with the CV
 
 ---
 

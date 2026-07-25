@@ -7,22 +7,21 @@ import {
     useScroll,
     useMotionValueEvent,
 } from 'framer-motion'
-import Image from 'next/image'
-import { portfolioData } from '@/data/content'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Project {
     id: string
     title: string
+    subtitle: string
     category: string
     status: 'LIVE' | 'BETA' | 'ARCHIVED' | 'IN DEV'
     bgText: string
     story: string
     stack: string[]
-    arch: string
+    architecture: string
+    date: string
     metrics: { value: string; label: string }[]
-    image: string
 }
 
 // ─── Project data ─────────────────────────────────────────────────────────────
@@ -30,71 +29,57 @@ interface Project {
 const PROJECTS: Project[] = [
     {
         id: 'PROJECT-01',
-        title: 'Research Fundamentals',
-        category: 'Financial Dashboard',
+        title: 'Isolated-State Market Matching Engine',
+        subtitle: 'Trading Simulator',
+        category: 'Systems',
         status: 'LIVE',
-        bgText: 'FINANCE',
-        story: 'Production frontend built from scratch for a fintech platform. React with MUI X Data Grid renders interactive, sortable dashboards over financial data of 1500+ companies — live for selected users with real API-driven data.',
-        stack: ['React', 'MUI X Data Grid', 'JavaScript', 'REST APIs'],
-        arch: 'Excel-based local data pipeline migrated to live external API integration for production deployment',
+        bgText: 'MARKET',
+        story: 'A trading simulator that streams live Binance data and lets users place synthetic trades that shift local price independently of real market.',
+        stack: ['C++', 'Node.js', 'Next.js', 'Redis', 'std::thread', 'WebSockets', 'Redis queues', 'Redis Pub/Sub', 'Binance live trade data'],
+        architecture: 'Architected a fully decoupled microservices system using C++, Node.js, Next.js, and Redis for real-time, low-latency trading simulation. Engineered a multi-threaded C++ matching engine using std::thread, dedicating one CPU thread per asset across 8 parallel order books. Wired a Node.js WebSocket ingestion pipeline that normalizes and streams thousands of live Binance trades per minute into Redis queues. Broadcasted synthetic price updates via Redis Pub/Sub, simulating market impact and slippage with instant resync to the real market.',
         metrics: [
-            { value: '1500+', label: 'Companies' },
-            { value: 'Live', label: 'API Data' },
-            { value: 'React', label: 'Frontend' },
-            { value: 'MUI', label: 'Data Grid' },
+            { value: '8', label: 'Parallel Order Books' },
+            { value: '1', label: 'CPU Thread / Asset' },
+            { value: 'Thousands', label: 'Binance Trades / Minute' },
+            { value: 'Redis', label: 'Queues + Pub/Sub' },
         ],
-        image: portfolioData.projects[0].image,
+        date: 'Mar 2026 - May 2026',
     },
     {
         id: 'PROJECT-02',
-        title: 'KGPath',
-        category: 'Lost and Found Platform',
+        title: 'Real-Time Collaborative Document Editor',
+        subtitle: 'CRDT Document Collaboration',
+        category: 'Collaboration',
         status: 'LIVE',
-        bgText: 'CAMPUS',
-        story: 'Full-stack platform built for IIT Kharagpur students to report, browse, and recover lost items. Secure authentication, CRUD APIs, and a responsive React frontend with status tracking, search, and filtering.',
-        stack: ['React', 'Node.js', 'Express', 'MongoDB'],
-        arch: 'MERN stack with JWT-based authentication, RESTful CRUD APIs, and responsive client-side routing',
+        bgText: 'SYNC',
+        story: 'Collaborative editor that lets multiple users edit a document at once, using Conflict-Free Replication Datatypes to stay synced, server-free.',
+        stack: ['Yjs', 'CRDT', 'WebSockets', 'Socket.io', 'PostgreSQL', 'JWT', 'RBAC'],
+        architecture: 'Designed a dual-layer state machine using the Yjs CRDT engine, replacing last-write-wins logic with deterministic, conflict-free merging. Formed a WebSocket relay with Socket.io that transmits compressed binary deltas instead of full JSON payloads, reducing network latency. Developed an append-only version history engine in PostgreSQL, restoring past snapshots into active CRDT session without desync. Implemented dual-layer RBAC and stateless JWT authentication, enforcing Owner, Editor, and Viewer permissions across both layers.',
         metrics: [
-            { value: 'MERN', label: 'Stack' },
+            { value: 'Owner / Editor / Viewer', label: 'Roles' },
+            { value: 'Binary deltas', label: 'Relay Transport' },
+            { value: 'Append-only', label: 'Version History' },
             { value: 'JWT', label: 'Auth' },
-            { value: 'CRUD', label: 'APIs' },
-            { value: 'Vercel', label: 'Deploy' },
         ],
-        image: portfolioData.projects[1].image,
+        date: 'Mar 2026 - Apr 2026',
     },
     {
         id: 'PROJECT-03',
-        title: 'Hive',
-        category: 'Query Management System',
+        title: 'Intelligent Query Management Platform',
+        subtitle: 'AI Ticketing Platform',
+        category: 'Full-Stack',
         status: 'LIVE',
-        bgText: 'WORKFLOW',
-        story: 'Role-based query management system with three access levels — Participants, Admins, and Team Heads. Complete query lifecycle with state transitions and email notifications on every update.',
-        stack: ['React', 'Node.js', 'Express', 'MongoDB'],
-        arch: 'RESTful API with role-based access control, query state machine (Unassigned → Assigned → Resolved), and email notification hooks',
+        bgText: 'TICKETS',
+        story: 'A full-stack ticketing platform that uses AI to categorize queries, routes them to the right team, and tracks resolution against SLA deadlines.',
+        stack: ['MERN', 'MongoDB', 'Express.js', 'React.js', 'Node.js', 'LLM API', 'MongoDB text search', 'RBAC'],
+        architecture: 'Architected a full-stack MERN application with role-based access control, separating Participant, Admin, and Team Head permissions. Integrated the LLM API to auto-categorize incoming queries and generate confidence scores, routing tickets to the right Team Head. Built an SLA tracking system with priority-based deadlines and breach detection, surfacing real-time compliance metrics on dashboards. Implemented a knowledge base using MongoDB text search, suggesting resolved queries to users before they submit a duplicate ticket.',
         metrics: [
-            { value: '3', label: 'Role Levels' },
-            { value: '4', label: 'Query States' },
-            { value: 'Email', label: 'Notifs' },
-            { value: 'RBAC', label: 'Auth Model' },
+            { value: 'Participant / Admin / Team Head', label: 'Roles' },
+            { value: 'LLM', label: 'Categorization' },
+            { value: 'SLA', label: 'Tracking' },
+            { value: 'MongoDB', label: 'Search' },
         ],
-        image: portfolioData.projects[2].image,
-    },
-    {
-        id: 'PROJECT-04',
-        title: "Nat'l Students' Space Challenge",
-        category: 'Fest Website',
-        status: 'LIVE',
-        bgText: 'SPACE',
-        story: 'Official website for NSSC — IIT Kharagpur\'s national space fest. Built with Next.js to handle 2000+ attendees across registration, schedule, and event pages with cross-device responsiveness and optimised assets.',
-        stack: ['Next.js', 'Tailwind CSS', 'JavaScript'],
-        arch: 'Next.js with dynamic routing, static asset optimisation, and responsive layout system for mobile and desktop parity',
-        metrics: [
-            { value: '2000+', label: 'Attendees' },
-            { value: 'Next.js', label: 'Framework' },
-            { value: 'nssc.in', label: 'Live URL' },
-            { value: 'Mobile', label: 'Responsive' },
-        ],
-        image: portfolioData.projects[3].image,
+        date: 'Nov 2025 - Jan 2026',
     },
 ]
 
@@ -240,17 +225,15 @@ export function WorkBento() {
                                                 {p.id}
                                             </p>
                                             <p
-                                                className={`font-mono text-sm font-semibold truncate leading-tight ${
-                                                    i === activeIndex ? 'text-white' : 'text-neutral-600'
-                                                }`}
+                                                className={`font-mono text-sm font-semibold truncate leading-tight ${i === activeIndex ? 'text-white' : 'text-neutral-600'
+                                                    }`}
                                             >
                                                 {p.title}
                                             </p>
                                             <div className="flex items-center gap-2 mt-1 flex-wrap">
                                                 <span
-                                                    className={`font-mono text-[9px] ${
-                                                        i === activeIndex ? 'text-orange-400' : 'text-neutral-700'
-                                                    }`}
+                                                    className={`font-mono text-[9px] ${i === activeIndex ? 'text-orange-400' : 'text-neutral-700'
+                                                        }`}
                                                 >
                                                     {p.category}
                                                 </span>
@@ -381,6 +364,12 @@ export function WorkBento() {
                                     {project.title}
                                 </motion.h2>
 
+                                <div className="flex flex-wrap items-center gap-3 mb-5 font-mono text-[9px] text-neutral-600 uppercase tracking-[0.2em]">
+                                    <span>{project.subtitle}</span>
+                                    <span className="text-neutral-700">/</span>
+                                    <span>{project.date}</span>
+                                </div>
+
                                 {/* Row 3: Story */}
                                 <motion.p
                                     initial={{ opacity: 0 }}
@@ -432,7 +421,7 @@ export function WorkBento() {
                                                 Architecture
                                             </p>
                                             <p className="text-neutral-400 text-[10px] leading-relaxed">
-                                                {project.arch}
+                                                {project.architecture}
                                             </p>
                                         </div>
                                     </motion.div>
@@ -473,7 +462,7 @@ export function WorkBento() {
                                         </div>
                                     </motion.div>
 
-                                    {/* Panel C: Project image (lg+ only) */}
+                                    {/* Panel C: Preview */}
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
@@ -481,13 +470,31 @@ export function WorkBento() {
                                         className="hidden lg:block w-48 xl:w-56"
                                     >
                                         <div className="relative h-full min-h-[180px] border border-neutral-800 rounded-lg overflow-hidden bg-neutral-900/50">
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                fill
-                                                className="object-cover opacity-55"
+                                            <div
+                                                className="absolute inset-0"
+                                                style={{
+                                                    background:
+                                                        'radial-gradient(circle at top left, rgba(249,115,22,0.28), transparent 40%), linear-gradient(135deg, rgba(17,24,39,0.95), rgba(15,23,42,0.88))',
+                                                }}
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/10 to-transparent" />
+                                            <div className="absolute inset-0 flex flex-col justify-between p-4">
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <div className="font-mono text-[9px] text-orange-400 uppercase tracking-[0.25em]">
+                                                        {project.date}
+                                                    </div>
+                                                    <div className="font-mono text-[9px] text-neutral-500 uppercase tracking-[0.25em] text-right">
+                                                        {project.subtitle}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p className="font-black text-white leading-none text-2xl tracking-tight">
+                                                        {project.bgText}
+                                                    </p>
+                                                    <p className="mt-2 text-[10px] leading-relaxed text-neutral-300">
+                                                        {project.category}
+                                                    </p>
+                                                </div>
+                                            </div>
 
                                             {/* Corner brackets */}
                                             <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-orange-500/50 pointer-events-none" />
@@ -506,7 +513,7 @@ export function WorkBento() {
 
                                             <div className="absolute bottom-3 left-3">
                                                 <p className="font-mono text-[8px] text-orange-400/70 uppercase tracking-wider">
-                                                    Preview
+                                                    {project.subtitle}
                                                 </p>
                                             </div>
                                         </div>

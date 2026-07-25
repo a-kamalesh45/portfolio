@@ -170,7 +170,7 @@ export function BlueprintAbout() {
 
                             <div className="pl-8 pt-6 pb-6 pr-6">
                                 <div className="font-mono text-xs text-primary-600 mb-6 tracking-wider">
-                                    [IIT KHARAGPUR • CIVIL ENGINEERING • 2024–PRESENT]
+                                    [IIT KHARAGPUR • B.TECH (HONS.) CIVIL ENGINEERING • 2028]
                                 </div>
 
                                 <div className="space-y-6 text-neutral-700 leading-relaxed">

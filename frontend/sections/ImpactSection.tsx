@@ -36,43 +36,43 @@ type Stat = NumberStat | TextStat
 const STATS: Stat[] = [
   {
     type: 'number',
-    value: 2500,
-    suffix: '+',
-    label: 'Participants Coordinated',
-    context: 'End-to-end logistics across large-scale technical events',
-    bgWord: 'COORDINATED',
-  },
-  {
-    type: 'number',
-    value: 2000,
-    suffix: '+',
-    label: 'Fest Participants Served',
-    context: "NSSC — National Students' Space Challenge, IIT Kharagpur",
-    bgWord: 'DELIVERED',
-  },
-  {
-    type: 'number',
-    value: 1500,
+    value: 5000,
     suffix: '+',
     label: 'Companies Visualized',
-    context: 'Full-stack dashboards built on real financial data',
-    bgWord: 'VISUALIZED',
+    context: 'Financial data from Excel sources served through the company website',
+    bgWord: 'COMPANIES',
   },
   {
     type: 'number',
-    value: 4,
-    suffix: '+',
-    label: 'Production Systems Built',
-    context: 'Real software. Real users. Shipped and live.',
-    bgWord: 'DEPLOYED',
+    value: 8,
+    suffix: '',
+    label: 'Parallel Order Books',
+    context: 'One CPU thread per asset in the C++ matching engine',
+    bgWord: 'MATCHING',
   },
   {
     type: 'text',
-    displayText: 'IIT KGP',
+    displayText: 'THOUSANDS',
     suffix: '',
-    label: 'Current Institution — 8.33 CGPA',
-    context: 'Civil Engineering → Software Development',
-    bgWord: 'ENGINEERED',
+    label: 'Live Binance Trades / Minute',
+    context: 'Thousands of live Binance trades per minute streamed through Node.js and Redis',
+    bgWord: 'BINANCE',
+  },
+  {
+    type: 'number',
+    value: 1400,
+    suffix: '+',
+    label: 'Codeforces Rating',
+    context: 'Handle: starry_night_22',
+    bgWord: 'RATING',
+  },
+  {
+    type: 'number',
+    value: 330,
+    suffix: '+',
+    label: 'Problems Solved',
+    context: 'Across LeetCode and Codeforces',
+    bgWord: 'PROBLEMS',
   },
 ]
 
@@ -373,10 +373,9 @@ function EndingBlock() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          From coordinating events for{' '}
-          <span className="text-orange-400">2500+ participants</span>
+          From <span className="text-orange-400">8 parallel order books</span>
           <br />
-          to building software used by real users,
+          to <span className="text-orange-400">330+ problems</span>,
           <br />
           <span className="text-neutral-500">
             I enjoy creating systems that scale.
@@ -429,7 +428,7 @@ export function ImpactSection() {
         style={{ height: `${STATS.length * 100}vh` }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden bg-neutral-50 relative">
+        <div className="sticky top-0 h-screen overflow-hidden bg-neutral-50">
           <BlueprintGrid id="impact-stats-grid" />
 
           <div

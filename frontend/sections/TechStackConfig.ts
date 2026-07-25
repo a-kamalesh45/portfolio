@@ -19,7 +19,7 @@
  * │  │Mongo│ │Redis│  │ Git│  │C++ │  │Pyth│  │ AWS│  │Linux│  │
  * │  └────┘  └────┘  └────┘  └────┘  └────┘  └────┘  └────┘   │
  * │                                                               │
- * │         16 technologies mastered and counting...             │
+ * │     CV-aligned technologies and tools from the portfolio      │
  * └─────────────────────────────────────────────────────────────┘
  * 
  * RESPONSIVE BREAKPOINTS:
@@ -63,7 +63,7 @@ export const TECH_STACK_CONFIG = {
     section: {
         id: "tech-stack",
         title: "Tech Stack",
-        subtitle: "Technologies and tools I use to bring ideas to life",
+        subtitle: "Technologies and tools listed in the CV",
         background: "bg-zinc-950",
         padding: "py-20 px-6 lg:px-16",
     },

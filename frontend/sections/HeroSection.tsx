@@ -180,7 +180,7 @@ export function HeroSection() {
                         {/* Description Lines */}
                         <p className="text-base md:text-lg text-gray-700 font-normal leading-relaxed">
                             Building products that ship.<br />
-                            Studying Civil Engineering at IIT KGP.
+                            Studying B.Tech. (Hons.) in Civil Engineering at IIT Kharagpur.
                         </p>
 
                         {/* Feature List */}

@@ -9,60 +9,23 @@ export function TechStackSection() {
     const sectionRef = useRef(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
 
-    // Define the system architecture zones
+    // Define the CV-aligned skill zones
     const systemArchitecture = [
         {
-            title: 'Frontend',
+            title: 'Languages',
             techs: [
                 {
-                    name: 'React',
-                    icon: 'react_light.svg',
-                    connections: ['Node.js', 'Next.js'],
-                    version: 'UI Library',
-                    latency: 'Component-based',
-                    status: 'active'
-                },
-                {
-                    name: 'Next.js',
-                    icon: 'nextjs_icon_dark.svg',
-                    connections: ['Node.js', 'React'],
-                    version: 'SSR / SSG',
-                    latency: 'Full-stack',
-                    status: 'active'
-                },
-                {
-                    name: 'Tailwind CSS',
-                    icon: 'tailwindcss.svg',
-                    connections: ['React', 'Next.js'],
-                    version: 'Utility CSS',
-                    latency: 'Styling',
-                    status: 'active'
-                },
-            ]
-        },
-        {
-            title: 'Backend',
-            techs: [
-                {
-                    name: 'Node.js',
-                    icon: 'nodejs.svg',
-                    connections: ['React', 'MongoDB', 'Express'],
-                    version: 'JS Runtime',
-                    latency: 'Server-side',
-                    status: 'active'
-                },
-                {
-                    name: 'Express',
-                    icon: 'expressjs.svg',
-                    connections: ['Node.js', 'MongoDB'],
-                    version: 'REST APIs',
-                    latency: 'Routing',
+                    name: 'C',
+                    icon: 'c-plusplus.svg',
+                    connections: ['C++', 'Python'],
+                    version: 'Systems',
+                    latency: 'Low-level',
                     status: 'active'
                 },
                 {
                     name: 'C++',
                     icon: 'c-plusplus.svg',
-                    connections: ['Python'],
+                    connections: ['C', 'Python'],
                     version: 'Systems',
                     latency: 'Low-level',
                     status: 'active'
@@ -70,46 +33,211 @@ export function TechStackSection() {
                 {
                     name: 'Python',
                     icon: 'python.svg',
-                    connections: ['MongoDB', 'C++'],
+                    connections: ['C', 'C++', 'JavaScript'],
                     version: 'Scripting',
                     latency: 'Data / General',
+                    status: 'active'
+                },
+                {
+                    name: 'JavaScript',
+                    icon: 'javascript.svg',
+                    connections: ['TypeScript', 'HTML', 'CSS'],
+                    version: 'Language',
+                    latency: 'Client + Server',
+                    status: 'active'
+                },
+                {
+                    name: 'TypeScript',
+                    icon: 'javascript.svg',
+                    connections: ['JavaScript', 'React.js'],
+                    version: 'Typed JS',
+                    latency: 'Application',
+                    status: 'active'
+                },
+                {
+                    name: 'HTML',
+                    icon: 'html5.svg',
+                    connections: ['CSS', 'JavaScript'],
+                    version: 'Markup',
+                    latency: 'Structure',
+                    status: 'active'
+                },
+                {
+                    name: 'CSS',
+                    icon: 'css_old.svg',
+                    connections: ['HTML', 'Tailwind CSS'],
+                    version: 'Styling',
+                    latency: 'Presentation',
                     status: 'active'
                 },
             ]
         },
         {
-            title: 'Data & Tools',
+            title: 'Frameworks & Libraries',
+            techs: [
+                {
+                    name: 'React.js',
+                    icon: 'react_light.svg',
+                    connections: ['Next.js', 'Tailwind CSS'],
+                    version: 'UI Library',
+                    latency: 'Component-based',
+                    status: 'active'
+                },
+                {
+                    name: 'Next.js',
+                    icon: 'nextjs_icon_dark.svg',
+                    connections: ['React.js', 'Node.js'],
+                    version: 'App Router',
+                    latency: 'Full-stack',
+                    status: 'active'
+                },
+                {
+                    name: 'Node.js',
+                    icon: 'nodejs.svg',
+                    connections: ['Express.js', 'MongoDB', 'PostgreSQL'],
+                    version: 'JS Runtime',
+                    latency: 'Server-side',
+                    status: 'active'
+                },
+                {
+                    name: 'Express.js',
+                    icon: 'expressjs.svg',
+                    connections: ['Node.js', 'MongoDB', 'REST APIs'],
+                    version: 'REST APIs',
+                    latency: 'Routing',
+                    status: 'active'
+                },
+                {
+                    name: 'Socket.io',
+                    icon: 'vscode.svg',
+                    connections: ['WebSockets', 'Yjs'],
+                    version: 'Realtime',
+                    latency: 'Transport',
+                    status: 'active'
+                },
+                {
+                    name: 'Yjs',
+                    icon: 'vscode.svg',
+                    connections: ['Socket.io', 'JWT'],
+                    version: 'CRDT Engine',
+                    latency: 'Sync',
+                    status: 'active'
+                },
+                {
+                    name: 'Tailwind CSS',
+                    icon: 'tailwindcss.svg',
+                    connections: ['React.js', 'Next.js'],
+                    version: 'Utility CSS',
+                    latency: 'Styling',
+                    status: 'active'
+                },
+                {
+                    name: 'Material UI',
+                    icon: 'vscode.svg',
+                    connections: ['React.js', 'Node.js'],
+                    version: 'Component System',
+                    latency: 'UI',
+                    status: 'active'
+                },
+                {
+                    name: 'JWT',
+                    icon: 'jwt.svg',
+                    connections: ['Node.js', 'PostgreSQL'],
+                    version: 'Auth',
+                    latency: 'Session-free',
+                    status: 'active'
+                },
+            ]
+        },
+        {
+            title: 'Tools & Technologies',
             techs: [
                 {
                     name: 'MongoDB',
                     icon: 'mongodb-icon-light.svg',
-                    connections: ['Node.js', 'Express'],
+                    connections: ['Node.js', 'Express.js', 'REST APIs'],
                     version: 'NoSQL DB',
                     latency: 'Document store',
                     status: 'active'
                 },
                 {
-                    name: 'Git',
-                    icon: 'git.svg',
-                    connections: ['GitHub'],
+                    name: 'PostgreSQL',
+                    icon: 'vscode.svg',
+                    connections: ['JWT', 'Yjs'],
+                    version: 'SQL DB',
+                    latency: 'Relational',
+                    status: 'active'
+                },
+                {
+                    name: 'Redis',
+                    icon: 'redis.svg',
+                    connections: ['Node.js', 'WebSockets'],
+                    version: 'In-memory',
+                    latency: 'Queues + Pub/Sub',
+                    status: 'active'
+                },
+                {
+                    name: 'Docker',
+                    icon: 'docker.svg',
+                    connections: ['AWS', 'Vercel'],
+                    version: 'Containers',
+                    latency: 'Deployment',
+                    status: 'active'
+                },
+                {
+                    name: 'Kafka',
+                    icon: 'apache-kafka-light.svg',
+                    connections: ['Node.js', 'Redis'],
+                    version: 'Streaming',
+                    latency: 'Event bus',
+                    status: 'active'
+                },
+                {
+                    name: 'AWS',
+                    icon: 'aws_light.svg',
+                    connections: ['Docker', 'Vercel'],
+                    version: 'Cloud',
+                    latency: 'Infrastructure',
+                    status: 'active'
+                },
+                {
+                    name: 'Git/GitHub',
+                    icon: 'github_light.svg',
+                    connections: ['Docker', 'Vercel'],
                     version: 'Version Control',
                     latency: 'Source',
                     status: 'active'
                 },
                 {
-                    name: 'GitHub',
-                    icon: 'github_light.svg',
-                    connections: ['Git'],
-                    version: 'Code Hosting',
-                    latency: 'Collaboration',
+                    name: 'Postman',
+                    icon: 'vscode.svg',
+                    connections: ['REST APIs', 'WebSockets'],
+                    version: 'API Testing',
+                    latency: 'Validation',
                     status: 'active'
                 },
                 {
-                    name: 'VS Code',
+                    name: 'REST APIs',
                     icon: 'vscode.svg',
-                    connections: ['Git'],
-                    version: 'IDE',
-                    latency: 'Editor',
+                    connections: ['Node.js', 'MongoDB'],
+                    version: 'HTTP',
+                    latency: 'Networking',
+                    status: 'active'
+                },
+                {
+                    name: 'WebSockets',
+                    icon: 'vscode.svg',
+                    connections: ['Socket.io', 'Redis'],
+                    version: 'Realtime',
+                    latency: 'Bidirectional',
+                    status: 'active'
+                },
+                {
+                    name: 'Vercel',
+                    icon: 'vscode.svg',
+                    connections: ['Next.js', 'Docker'],
+                    version: 'Deployment',
+                    latency: 'Hosting',
                     status: 'active'
                 },
             ]
@@ -152,13 +280,13 @@ export function TechStackSection() {
                     className="mb-12 text-center"
                 >
                     <div className="font-mono text-xs md:text-sm text-orange-600 tracking-widest uppercase mb-4">
-                        {`// Holographic System Schematic`}
+                        {`// CV-Aligned Skill Schematic`}
                     </div>
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
-                        Architecture Map
+                        Skill Map
                     </h2>
                     <p className="text-gray-600 text-base max-w-3xl mx-auto font-mono">
-                        Real-time diagnostics of the technology pipeline. Hover over components to trace signal flow through the system.
+                        Exact skill categories and technologies from the CV. Hover over components to trace relationships between the listed tools.
                     </p>
                 </motion.div>
 
